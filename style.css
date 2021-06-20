@@ -1,0 +1,42 @@
+/* Header text */
+
+p{
+    text-align: center;
+    font-size: 2.0rem;
+}
+
+/* Container styles */
+
+.calcBody{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.calc{
+    background: black;
+    border-radius: 10px;
+}
+
+/* Screen of the calculator */
+
+.screen{
+    display: grid;
+    justify-content: center;
+    margin: 10px 5px;
+}
+
+/* Buttouns Section */
+
+.buttons{
+    margin: 10px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 5px;
+}
+
+
+
+
