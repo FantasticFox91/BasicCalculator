@@ -10,6 +10,7 @@ var display = 0;
 var display2 = 0;
 var operator = "";
 var checker = true;
+var counter = 0;
 
 
 //Basic functions
@@ -36,40 +37,65 @@ operate = (num1,num2,operator) => {
     }
     display = 0;
     display2 = 0;
-    screenValue.value = ""
+    
 };
 
 // Event listeners
 
 numberBtn.map((x)=> x.addEventListener('click', ()=>{
     if(checker === true){
-    screenValue.value += x.value;
-    display = screenValue.valueAsNumber;
-    
-    screenValue2.placeholder += x.value;
+    if(counter === 0){
+        screenValue.value = "";
+        screenValue.value += x.value;
+        display += x.value
+        counter = 1;
+    }else{
+        screenValue.value += x.value;
+        display = screenValue.value;
+    }
     }else if(checker === false){
-    screenValue.value += x.value;
-    display2 = screenValue.valueAsNumber;
-    screenValue2.placeholder += x.value;
-    
+        if(counter === 0){
+            screenValue.value = "";
+            screenValue.value += x.value;
+            display2 += x.value
+            counter = 1;
+        }else{
+            screenValue.value += x.value;
+            display2 = screenValue.value;
+        }
+
     }
 }));
 
-screenValue.addEventListener("change", () => console.log("HMMMMM"));
-
 signsBtns.map((x) => x.addEventListener("click", () =>{
-    operator = x.value
-    screenValue2.value = ""
-    screenValue2.placeholder += `${operator}`
-    screenValue.value = ""
-    checker = !checker
-    screenValue.placeholder = ``
+    screenValue.value = "0"
+    if(checker === false){
+        operator = x.value
+        screenValue2.placeholder += `${operator}`
+        screenValue.value = "";
+        screenValue.value = operate(Number(display),Number(display2),operator);
+        display = screenValue.value;
+        display2 = 0;
+        counter = 0;
+    }else{
+        operator = x.value;
+        screenValue2.placeholder += `${operator}`;
+        checker = !checker;
+        screenValue.value = "";
+        display2 = screenValue.value
+        counter = 0;
+        console.log(display)
+    }  
     
 }));
 
 evalBtn.addEventListener("click",() =>{
-    screenValue.value = eval(screenValue2.placeholder)
+    console.log(display,display2)
+    screenValue.value = operate(Number(display),Number(display2),operator);
     screenValue2.placeholder += `=`
+    counter = 0;
+    display = screenValue.value;
+    display2 = 0
     // operate(display,display2,operator)
     // screenValue.value = operate(display,display2,operator)
     // screenValue2.placeholder = `${display}${operator}${display2}=`
@@ -78,8 +104,12 @@ evalBtn.addEventListener("click",() =>{
 clearBtn.addEventListener("click", () =>{
     display = 0;
     display2 = 0;
-    screenValue.value = ""
-    screenValue.placeholder = "Please enter your numbers"
+    screenValue.value = "0"
+    screenValue.placeholder = ""
     screenValue2.placeholder = ""
+    checker = true;
+    counter = 0;
 });
 
+
+// после первого клика на кнопку начинается новая переменная и заканчивается она после клика на оператор
