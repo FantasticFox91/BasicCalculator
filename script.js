@@ -21,6 +21,11 @@ var index = 0;
 
 //Basic functions
 
+//Round result of ariphmetic operation in a case of long decimals
+
+roundDecimal = result => Number.isInteger(result) ? result : Math.round(result*100000)/100000;
+
+//Ariphmetic operations
 add = (a,b) => a+b;
 
 substract = (a,b) => a-b;
@@ -29,97 +34,84 @@ multiply = (a,b) => a*b;
 
 divide = (a,b) => a/b;
 
-percent = (a,b) => {
-    let result = a*(b*0.01);
-    if(Number.isInteger(result)){
-        return result;
-    }else{
-        return Math.round(result*100000)/100000;
-    }
-}
+percent = (a,b) => {return roundDecimal(a*(b*0.01))};
+
+//Hard reset all valuables 
+reset = () =>{
+    display = 0
+    display2 = 0
+    screenValue.value = ""
+    screenValue.placeholder = ""
+    checker = true
+    counter = 0
+    operator = ""
+    counterSign = 0
+    screenValue.value = 0
+    screenValue2.placeholder = ""
+};
+
+//Soft reset of varuables for correct working after pressing equal sign and precentage
+softReset = () => {
+    counter = 0;
+    display = screenValue.value;
+    counterSign = 0;
+    operator = "";
+    checker = true;
+};
+
+//Delete wrong entered digits  
+deleteLastChar = (number) => {
+    screenValue.value = screenValue.value.substring(0,screenValue.value.length -1)
+    number = screenValue.value
+};
 
 //Connection basic function into main function
 
 operate = (num1,num2,operator) => {
     if(Number(num1) === 0 && Number(num2) === 0){
-        console.log("Hmmm");
-        display = 0;
-        display2 = 0;
-        screenValue.value = "";
-        screenValue.placeholder = "";
-        checker = true;
-        counter = 0;
-        operator = "";
-        counterSign = 0;
-        screenValue.value = 0;
-        screenValue2.placeholder = ""
-
+        reset()
     }else if(operator === "+"){
-        let result = add(num1,num2);
-        if(Number.isInteger(result)){
-            return result;
-        }else{
-            return Math.round(result*100000)/100000;
-        }
+        return roundDecimal(add(num1,num2))
     }else if(operator === "-"){
-        let result = substract(num1,num2);
-        if(Number.isInteger(result)){
-            return result;
-        }else{
-            return Math.round(result*100000)/100000;;
-        }
+        return roundDecimal(substract(num1,num2))
     }else if(operator === "*"){
-        let result = multiply(num1,num2);
-        if(Number.isInteger(result)){
-            return result;
-        }else{
-            return Math.round(result*100000)/100000;;
-        }
+        return roundDecimal(multiply(num1,num2))
     }else if(operator === "/"){
-        let result = divide(num1,num2);
-        if(Number.isInteger(result)){
-            return result;
-        }else{
-            return Math.round(result*100000)/100000;
-        }
+        return roundDecimal(divide(num1,num2))
     }
     display = 0;
     display2 = 0;
-    
 };
 
-// Event listeners
+// Event listeners for numbers
 
 numberBtn.map((x)=> x.addEventListener('click', ()=>{
-    if(checker === true){
-    if(counter === 0){
-        screenValue.value = null;
-        screenValue.value += x.value;
-        display += Number(x.value)
-        counter = 1;
-        screenValue2.placeholder = "";
-        screenValue2.placeholder += Number(x.value)
-    }else{
-        screenValue.value += x.value;
-        display = screenValue.value;
-        screenValue2.placeholder += x.value
-    }
-    }else if(checker === false){
-        if(counter === 0){
-            screenValue.value = "";
-            screenValue.value += x.value;
-            display2 = 0;
+    if(checker === true && counter === 0){
+            screenValue.value = ""
+            screenValue.value += x.value
+            display += Number(x.value)
+            counter++
+            screenValue2.placeholder = ""
+            screenValue2.placeholder += Number(x.value)
+        }else if(checker === true && counter === 1) {
+            screenValue.value += x.value
+            display = screenValue.value
+            screenValue2.placeholder += x.value
+        }else if(checker === false && counter === 0){
+            screenValue.value = ""
+            screenValue.value += x.value
+            display2 = 0
             display2 += x.value
-            counter = 1;
-            
-        }else{
-            screenValue.value += x.value;
-            display2 = screenValue.value;
-            
+            counter ++
+        }else if(checker === false && counter === 1){
+            screenValue.value += x.value
+            display2 = screenValue.value
         }
-
     }
-}));
+ )
+);
+
+// Event listeners for sign buttons
 
 signsBtns.map((x) => x.addEventListener("click", () =>{
     if(counterSign === 0){
@@ -127,7 +119,6 @@ signsBtns.map((x) => x.addEventListener("click", () =>{
         checker = !checker;
         screenValue.value = "";
         counterSign ++;
-        
         screenValue2.placeholder = `${display}${operator}`
     }else if(counterSign === 1 && display2 != 0){
         screenValue.value = operate(Number(display),Number(display2),operator);
@@ -137,87 +128,49 @@ signsBtns.map((x) => x.addEventListener("click", () =>{
         counter = 0;
         screenValue2.placeholder = `${display}${operator}`
     }else{
-        display = 0;
-        display2 = 0;
-        screenValue.value = "";
-        screenValue.placeholder = "";
-        checker = true;
-        counter = 0;
-        operator = "";
-        counterSign = 0;
-        screenValue.value = 0;
-        screenValue2.placeholder = ""
+        reset()
     }  
 }));
 
+// Event listeners for evaluation sighn
+
 evalBtn.addEventListener("click",() =>{
-    if(operator === ""){
+            if(operator === ""){
+                alert("Please, choose operator")
+            }else if(operator === "/" && Number(display2) === 0){
+                alert("Sorry incorrect operation, don't try to destroy my calculator")
+                reset()
+            }else{
+                screenValue.value = operate(Number(display),Number(display2),operator)
+                screenValue2.placeholder = `${Number(display)}${operator}${Number(display2)}=`
+                softReset()
+            }
+        }
+    );
 
-    }else if(operator === "/" && Number(display2) === 0){
-        alert("Sorry incorrect operation, don't try to destroy my calculator");
-        counter = 0;
-        display = screenValue.value;
-        display2 = null;
-        counterSign = 0;
-        operator = "";
-        checker = true;
-    }else{
-        screenValue.value = operate(Number(display),Number(display2),operator);
-        screenValue2.placeholder = `${Number(display)}${operator}${Number(display2)}=`
-        counter = 0;
-        display = screenValue.value;
-        display2 = null;
-        counterSign = 0;
-        operator = "";
-        checker = true;
-}
-})
 
-clearBtn.addEventListener("click", () =>{
-    display = 0;
-    display2 = 0;
-    screenValue.value = "";
-    screenValue.placeholder = "";
-    checker = true;
-    counter = 0;
-    operator = "";
-    counterSign = 0;
-    screenValue.value = 0;
-    screenValue2.placeholder = ""
-});
+// Hard reset after pressing appropriate button
+clearBtn.addEventListener("click", () =>{reset()});
 
-decimalBtn.addEventListener("click", () =>{
-    if(screenValue.value.includes(".")){
-    }else{
-    screenValue.value = screenValue.value.concat(".")
-    }
-});
+//Add decimal to number
+decimalBtn.addEventListener("click", () =>{screenValue.value.includes(".") ? console.log("upsi") : screenValue.value = screenValue.value.concat(".")});
 
+//Make number opposite of number (need work on!!!)
 oppositeBtn.addEventListener("click", ()=>{
     screenValue.value = -screenValue.value;
     display = screenValue.value;
-});
+    }
+);
 
+//Percentage calculation
 percentageBtn.addEventListener("click", () =>{
     if(Number(screenValue.value) > 0.1) {
         screenValue.value = percent(display,display2);
         screenValue2.placeholder = `${display}*${display2*0.01}`
-        display = screenValue.value;
-        counterSign = 0;
-        checker = !checker
-        operator = "";
-    }    
-} );
+        softReset()
+        }    
+    } 
+);
 
-
-deleteBtn.addEventListener("click", () => {
-    if(checker === true){
-        screenValue.value = screenValue.value.substring(0,screenValue.value.length -1);
-        display = screenValue.value;
-        screenValue2.placeholder = screenValue2.placeholder.substring(0,screenValue2.placeholder.length -1);
-    }else{
-        screenValue.value = screenValue.value.substring(0,screenValue.value.length -1);
-        display2 = screenValue.value;  
-        screenValue2.placeholder = screenValue2.placeholder.substring(0,screenValue2.placeholder.length -1);
-    }
-})
+//Backspace button
+deleteBtn.addEventListener("click", () => { checker ? deleteLastChar(display) : deleteLastChar(display2)});
