@@ -15,20 +15,20 @@
         <div class="calcBody">
         <div class="calc">
             <div class="screen">
-                <input id="inputValue2" type="number" readonly placeholder="">
-                <input id="inputValue" type="number" readonly placeholder="" value = "0">
+                <input id="inputValue2" type="text" readonly placeholder="">
+                <input id="inputValue" type="text" readonly placeholder="" value = "0">
             </div>
             <div class="buttons">
                 <input type="reset" value="AC" id="AC"></input>
-                <button value="-" class="">+/-</button>
-                <button value="%" class="">%</button>
+                <button value="-" id="opposite">+/-</button>
+                <button value="%" id="percentage">%</button>
                 <button value="/" class="signs">/</button>
                 <button value="7" class="numbers">7</button>
                 <button value="8" class="numbers">8</button>
                 <button value="9" class="numbers">9</button>
                 <button value="*" class="signs">*</button>
                 <button value="4" class="numbers">4</button>
-                <button value="5" class="numbers">5</button>
+                <button value=5 class="numbers">5</button>
                 <button value="6" class="numbers">6</button>
                 <button value="-" class="signs">-</button>
                 <button value="1" class="numbers">1</button>
@@ -36,8 +36,9 @@
                 <button value="3" class="numbers">3</button>
                 <button value="+" class="signs">+</button>
                 <button value="0" class="numbers null">0</button>
-                <button value="," class="numbers">,</button>
+                <button value="." id="decimal">,</button>
                 <button id="evaluate">=</button>
+                <button id="delete">DEL</button>
             </div>
         </div>
     </div>
