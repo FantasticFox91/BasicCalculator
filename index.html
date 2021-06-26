@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <title>Calculator</title>
 </head>
 <body>
@@ -12,14 +13,16 @@
 </header>
 <!-- Main -->
 <main>
-        <div class="calcBody">
-        <div class="calc">
+    <div class="calcBody">
+        <div class="calc inner-border">
             <div class="screen">
+                <div class="wrapper">
                 <input id="inputValue2" type="text" readonly placeholder="">
                 <input id="inputValue" type="text" readonly placeholder="" value = "0">
             </div>
+            </div>
             <div class="buttons">
-                <input type="reset" value="AC" id="AC"></input>
+                <button value="AC" id="AC">AC</button>
                 <button value="-" id="opposite">+/-</button>
                 <button value="%" id="percentage">%</button>
                 <button value="/" class="signs">/</button>
@@ -42,7 +45,6 @@
             </div>
         </div>
     </div>
-   
 </main>
     
 <!-- Script -->
