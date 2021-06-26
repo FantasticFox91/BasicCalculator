@@ -1,8 +1,24 @@
 /* Header text */
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    height: 100vh;
+}
+
+header{
+    position: sticky;
+    background: salmon;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 5px rgb(100, 97, 97);
+}
 
 p{
     text-align: center;
     font-size: 2.0rem;
+    text-shadow: 2px 2px 5px black;
 }
 
 /* Container styles */
@@ -14,14 +30,22 @@ p{
     text-align: end;
 }
 
+main{
+    height: 90vw;
+}
+
 .calcBody{
-    display: grid;
+    display: flex;
     justify-content: center;
+    width: 50%;
+    margin: auto;
+    height: 60%;
 }
 
 .calc{
     background: black;
     border-radius: 10px;
+    
 }
 
 /* Screen of the calculator */
@@ -40,12 +64,34 @@ p{
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 5px;
+    
+}
+
+button{
+    border-radius: 5px;
+    outline: none;
 }
 
 button.null{
     
 }
 
+body{
+    background: aquamarine;
+}
 
+.container{
+    background: white;
+    width: 80%;
+    height: 50%;
+    margin: auto;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.container>p{
+    
+}
 
 

@@ -23,21 +23,21 @@ var index = 0;
 
 //Round result of ariphmetic operation in a case of long decimals
 
-roundDecimal = result => Number.isInteger(result) ? result : Math.round(result*100000)/100000;
+const roundDecimal = result => Number.isInteger(result) ? result : Math.round(result*100000)/100000;
 
 //Ariphmetic operations
-add = (a,b) => a+b;
+const add = (a,b) => a+b;
 
-substract = (a,b) => a-b;
+const substract = (a,b) => a-b;
 
-multiply = (a,b) => a*b;
+const multiply = (a,b) => a*b;
 
-divide = (a,b) => a/b;
+const divide = (a,b) => a/b;
 
-percent = (a,b) => {return roundDecimal(a*(b*0.01))};
+const percent = (a,b) => {return roundDecimal(a*(b*0.01))};
 
 //Hard reset all valuables 
-reset = () =>{
+const reset = () =>{
     display = 0
     display2 = 0
     screenValue.value = ""
@@ -51,7 +51,7 @@ reset = () =>{
 };
 
 //Soft reset of varuables for correct working after pressing equal sign and precentage
-softReset = () => {
+const softReset = () => {
     counter = 0;
     display = screenValue.value;
     counterSign = 0;
@@ -60,14 +60,14 @@ softReset = () => {
 };
 
 //Delete wrong entered digits  
-deleteLastChar = (number) => {
+const deleteLastChar = (number) => {
     screenValue.value = screenValue.value.substring(0,screenValue.value.length -1)
     number = screenValue.value
 };
 
 //Connection basic function into main function
 
-operate = (num1,num2,operator) => {
+const operate = (num1,num2,operator) => {
     if(Number(num1) === 0 && Number(num2) === 0){
         reset()
     }else if(operator === "+"){
@@ -90,9 +90,9 @@ numberBtn.map((x)=> x.addEventListener('click', ()=>{
             screenValue.value = ""
             screenValue.value += x.value
             display += Number(x.value)
-            counter++
             screenValue2.placeholder = ""
             screenValue2.placeholder += Number(x.value)
+            counter++
         }else if(checker === true && counter === 1) {
             screenValue.value += x.value
             display = screenValue.value
@@ -174,3 +174,4 @@ percentageBtn.addEventListener("click", () =>{
 
 //Backspace button
 deleteBtn.addEventListener("click", () => { checker ? deleteLastChar(display) : deleteLastChar(display2)});
+
