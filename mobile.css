@@ -20,7 +20,7 @@ header{
 
 p{
     text-align: center;
-    font-size: 2.0rem;
+    font-size: 5rem;
     text-shadow: 2px 2px 5px black;
 }
 
@@ -49,7 +49,7 @@ main{
     align-content: center;
     flex-wrap: wrap;
     align-items: center;
-    width: 25%;
+    width: 90%;
    
 }
 
@@ -63,7 +63,7 @@ main{
 .buttons{
     display: grid;
     grid-template-columns: 22% 22% 22% 22%;
-    grid-gap: 2%;
+    grid-gap: 20px;
     width:80%;
     height:63%;
     justify-content: center;
@@ -75,13 +75,13 @@ main{
 button{
     background: #F1F6F7;
     border-radius: 15px;
-    width:100%;
-    height:100%;
-    box-shadow: 3px 3px 10px 1px rgb(117, 117, 117);
+    width: 100%;
+    height: 100%;
+    box-shadow: 3px 3px 10px 1px rgb(117 117 117);
     border: none;
     font-family: "Karla", serif;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 4.2rem;
 }
 
 button:active{
@@ -100,9 +100,9 @@ button:active{
 input{
     border: 0px;
     outline: none;
-    height: 2em;
+    height: 105px;
     padding-right: 5px;
-    font-size: 1.5rem;
+    font-size: 3.5rem;
     background: #989a9b;
     font-family: 'Orbitron', sans-serif;
     text-align: end;
