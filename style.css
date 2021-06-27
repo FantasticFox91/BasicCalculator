@@ -84,6 +84,10 @@ button{
     font-size: 1.2rem;
 }
 
+button:hover{
+    filter: brightness(120%);
+}
+
 button:active{
     box-shadow: inset 3px 3px 10px 1px rgb(117, 117, 117);
     transform: translateY(2px) translateX(2px)
@@ -95,6 +99,18 @@ button:active{
     box-shadow: inset 1px 1px 1px 1px white;
     border-radius: 11px;
     
+}
+
+.operators{
+    background: #bebebe;
+}
+
+.clear{
+    background: red;
+}
+
+.clear:hover{
+    filter: brightness(80%);
 }
 
 input{
